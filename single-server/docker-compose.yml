@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  clickhouse:
+    image: yandex/clickhouse-server:21
+    restart: always
+    container_name: clickhouse-single
+    hostname: clickhouse-single
+    environment:
+      password_sha256_hex: ${password_sha256_hex}
+    ulimits:
+      nofile: 
+        soft: 262144
+        hard: 262144
+    ports:
+      - 8123:8123
+      - 9000:9000
+      - 9009:9009
+    volumes:
+      - ./logs/:/var/log/clickhouse-server/
+      - ./clickhouse-conf.d:/etc/clickhouse-server/config.d
+      - ./users.xml:/etc/clickhouse-server/users.d/users.xml
+      - ./data/ch/db:/var/lib/clickhouse

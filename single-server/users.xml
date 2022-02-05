@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<clickhouse>
+    <users>
+        <default remove="remove">
+        </default>
+        <analytics>
+            <password_sha256_hex from_env="password_sha256_hex" />
+        </analytics>  
+    </users>
+</clickhouse>

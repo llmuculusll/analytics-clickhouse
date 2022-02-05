@@ -1,0 +1,45 @@
+<clickhouse>
+    <remote_servers>
+        <analytics_circle_cluster>
+            <shard>
+                <internal_replication>true</internal_replication>
+                <replica>
+                    <default_database>analytics_01</default_database>
+                    <host from_env="SERVER_IP1" />
+                    <port>9000</port>
+                </replica>
+                <replica>
+                    <default_database>analytics_01</default_database>
+                    <host from_env="SERVER_IP3" />
+                    <port>9000</port>
+                </replica>
+            </shard>
+            <shard>
+                <internal_replication>true</internal_replication>
+                <replica>
+                    <default_database>analytics_02</default_database>
+                    <host from_env="SERVER_IP2" />
+                    <port>9000</port>
+                </replica>
+                <replica>
+                    <default_database>analytics_02</default_database>
+                    <host from_env="SERVER_IP1" />
+                    <port>9000</port>
+                </replica>
+            </shard>
+            <shard>
+                <internal_replication>true</internal_replication>
+                <replica>
+                    <default_database>analytics_03</default_database>
+                    <host from_env="SERVER_IP3" />
+                    <port>9000</port>
+                </replica>
+                <replica>
+                    <default_database>analytics_03</default_database>
+                    <host from_env="SERVER_IP2" />
+                    <port>9000</port>
+                </replica>
+            </shard>
+        </analytics_circle_cluster>
+    </remote_servers>
+</clickhouse>

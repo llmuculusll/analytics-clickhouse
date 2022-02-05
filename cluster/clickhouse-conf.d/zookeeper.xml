@@ -1,0 +1,16 @@
+<clickhouse>
+    <zookeeper>
+        <node>
+            <host from_env="SERVER_IP1" />
+            <port>2181</port>
+        </node>
+        <node>
+            <host from_env="SERVER_IP2" />
+            <port>2181</port>
+        </node>
+        <node>
+            <host from_env="SERVER_IP3" />
+            <port>2181</port>
+        </node>
+    </zookeeper>
+</clickhouse>

@@ -1,0 +1,41 @@
+version: '3.1'
+services:
+  zookeeper:
+    image: zookeeper:3.5
+    restart: always
+    container_name: zookeeper-${NODE_NUMBER}
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+      - 28880:2888
+      - 38880:3888
+    volumes:
+      - ./data/zk/data:/data
+      - ./data/zk/datalog:/datalog
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: ${ZOO_SERVERS}
+
+  
+  clickhouse:
+    image: yandex/clickhouse-server:21
+    restart: always
+    container_name: clickhouse-${NODE_NUMBER}
+    hostname: clickhouse-${NODE_NUMBER}
+    ulimits:
+      nofile: 
+        soft: 262144
+        hard: 262144
+    ports:
+      - 8123:8123
+      - 9000:9000
+      - 9009:9009
+    volumes:
+      - ./logs/:/var/log/clickhouse-server/
+      - ./clickhouse-conf.d:/etc/clickhouse-server/config.d
+      # - clickhot:/hot-${NODE_NUMBER}/clickhouse
+      # - clickcold:/cold-${NODE_NUMBER}/clickhouse
+      # - clickarchive:/archive-${NODE_NUMBER}/clickhouse
+      - ./data/ch/db:/var/lib/clickhouse
+    depends_on:
+      - zookeeper
